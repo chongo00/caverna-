@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Butterfly from "@/components/Butterfly";
 import NavigationSymbol from "@/components/NavigationSymbol";
@@ -10,15 +10,19 @@ import FinalMessage from "@/components/FinalMessage";
 import LightParticles from "@/components/LightParticles";
 import cavernBg from "@/assets/cavern-bg.jpg";
 
+// Importa tu archivo de audio - asegúrate de que el nombre coincida con el archivo que copies
+// Si tu archivo se llama diferente, cambia "background.mp3" por el nombre correcto
+import backgroundMusic from "@/assets/music/background.mp3";
+
 const LYRICS = [
-  "La plus belle des malédictions",
-  "Can I just have one more moondance with you, my love?",
-  "Your favorite song was on the oldies station",
-  "Oh, won't you kiss me on the mouth and love me like a sailor?\nAnd when you get a taste, can you tell me what's my flavor?",
-  "Are you shining just for me?",
-  "You can act all shy, but you know that I want you",
+  "La más bella de las maldiciones",
+  "¿Puedo tener un baile más bajo la luna contigo, mi amor?",
+  "Tu canción favorita sonaba en la radio vieja",
+  "¿Me besarás en la boca y me amarás como un marinero?\n¿Y cuando pruebes, podrás decirme cuál es mi sabor?",
+  "¿Estás brillando solo para mí?",
+  "Puedes actuar tímido, pero sabes que te deseo",
   "Quiero clavar mis colmillos en tu carne, morena",
-  "The way you touch, the way you taste",
+  "La forma en que tocas, la forma en que sabes",
 ];
 
 const BUTTERFLY_POSITIONS = [
@@ -41,11 +45,27 @@ const Index = () => {
   const [poemOpen, setPoemOpen] = useState(false);
   const [playlistOpen, setPlaylistOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setEntranceComplete(true), 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Control de audio
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isMuted) {
+      audio.pause();
+    } else {
+      audio.play().catch((error) => {
+        console.log("Autoplay blocked:", error);
+        // El navegador puede bloquear autoplay hasta que el usuario interactúe
+      });
+    }
+  }, [isMuted]);
 
   const handleActivate = useCallback((id: number) => {
     setActivatedButterflies((prev) => {
@@ -130,6 +150,14 @@ const Index = () => {
 
       {/* Sound toggle */}
       <SoundToggle isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} />
+
+      {/* Background music */}
+      <audio
+        ref={audioRef}
+        src={backgroundMusic}
+        loop
+        preload="auto"
+      />
 
       {/* Cavern Menu */}
       <AnimatePresence>

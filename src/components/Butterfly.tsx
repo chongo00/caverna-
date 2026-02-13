@@ -72,73 +72,83 @@ const Butterfly = ({ id, lyric, startX, startY, activated, onActivate, allDone }
   const glowIntensity = (activated || allDone) ? 1 : hasBeenClicked ? 0.6 : 0.3;
 
   const handleClick = useCallback(() => {
-    if (hasBeenClicked || showLyric) return;
-    setHasBeenClicked(true);
+    if (showLyric) return;
+    if (!hasBeenClicked) {
+      setHasBeenClicked(true);
+      onActivate(id);
+    }
     setShowPulse(true);
     setShowLyric(true);
-    onActivate(id);
     setTimeout(() => setShowPulse(false), 1500);
     setTimeout(() => setShowLyric(false), 5000);
-  }, [hasBeenClicked, showLyric, id, onActivate]);
+  }, [showLyric, hasBeenClicked, id, onActivate]);
 
   return (
-    <motion.div
-      className="absolute cursor-pointer"
-      style={{
-        left: `${startX}%`,
-        top: `${startY}%`,
-        filter: `blur(${blurAmount}px) drop-shadow(0 0 ${8 + glowIntensity * 15}px hsl(188 85% 60% / ${0.4 + glowIntensity * 0.4}))`,
-        zIndex: blurAmount === 0 ? 10 : blurAmount === 1 ? 20 : 5,
-      }}
-      animate={showLyric ? {} : floatVariant}
-      transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
-      onClick={handleClick}
-    >
-      {/* Carmine pulse on click */}
-      <AnimatePresence>
-        {showPulse && (
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: "radial-gradient(circle, hsl(345 72% 47% / 0.4), transparent 70%)",
-              width: size * 3, height: size * 3,
-              left: -(size), top: -(size),
-            }}
-            initial={{ scale: 0.5, opacity: 0.6 }}
-            animate={{ scale: 3, opacity: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* SVG Butterfly */}
+    <>
       <motion.div
-        animate={{ scaleX: [1, 0.85, 1] }}
-        transition={{ duration: 0.8 + (id % 3) * 0.2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute cursor-pointer"
+        style={{
+          left: `${startX}%`,
+          top: `${startY}%`,
+          filter: `blur(${blurAmount}px) drop-shadow(0 0 ${8 + glowIntensity * 15}px hsl(188 85% 60% / ${0.4 + glowIntensity * 0.4}))`,
+          zIndex: blurAmount === 0 ? 10 : blurAmount === 1 ? 20 : 5,
+        }}
+        animate={showLyric ? {} : floatVariant}
+        transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
+        onClick={handleClick}
       >
-        <ButterflyWingSVG size={size} glowIntensity={glowIntensity} />
+        {/* Carmine pulse on click */}
+        <AnimatePresence>
+          {showPulse && (
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "radial-gradient(circle, hsl(345 72% 47% / 0.4), transparent 70%)",
+                width: size * 3, height: size * 3,
+                left: -(size), top: -(size),
+              }}
+              initial={{ scale: 0.5, opacity: 0.6 }}
+              animate={{ scale: 3, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* SVG Butterfly */}
+        <motion.div
+          animate={{ scaleX: [1, 0.85, 1] }}
+          transition={{ duration: 0.8 + (id % 3) * 0.2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ButterflyWingSVG size={size} glowIntensity={glowIntensity} />
+        </motion.div>
       </motion.div>
 
-      {/* Lyric display */}
+      {/* Lyric display - OUTSIDE the blurred container */}
       <AnimatePresence>
         {showLyric && (
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none"
-            style={{ top: -80 - (lyric.length > 60 ? 30 : 0) }}
+            className="fixed pointer-events-none"
+            style={{ 
+              left: `${startX}%`,
+              top: `${startY}%`,
+              transform: 'translate(-50%, calc(-100% - 80px))',
+              zIndex: 100,
+            }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
             <div
-              className="px-6 py-3 rounded-lg font-display text-base sm:text-lg italic text-foreground text-glow-carmine whitespace-pre-line text-center max-w-[80vw]"
+              className="px-5 py-3 rounded-2xl font-display text-lg sm:text-xl font-normal whitespace-pre-line text-center"
               style={{
-                background: "radial-gradient(ellipse, hsl(340 50% 75% / 0.12), transparent 80%)",
-                whiteSpace: "pre-line",
-                wordBreak: "break-word",
-                maxWidth: "80vw",
-                width: "max-content",
+                background: "radial-gradient(ellipse at center, hsl(220 40% 4% / 0.25), hsl(220 40% 3% / 0.15))",
+                backdropFilter: "blur(16px)",
+                color: "hsl(0 0% 100%)",
+                textShadow: "0 0 25px hsl(345 85% 70% / 1), 0 0 50px hsl(345 85% 70% / 0.7), 0 0 75px hsl(345 85% 70% / 0.4), 0 2px 10px rgba(0,0,0,1)",
+                maxWidth: "min(80vw, 600px)",
+                minWidth: "250px",
               }}
             >
               {lyric}
@@ -160,7 +170,7 @@ const Butterfly = ({ id, lyric, startX, startY, activated, onActivate, allDone }
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </>
   );
 };
 

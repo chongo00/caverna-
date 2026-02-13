@@ -10,48 +10,56 @@ const songs = [
   {
     title: "Sailor Song",
     artist: "Gigi Perez",
+    youtubeId: "1lrFsXkT_rM",
     description:
       "El carmesí puro de la devoción prohibida. Una guitarra acústica que tiembla como un primer beso robado bajo la luna, voz que promete salvación y condena al mismo tiempo.",
   },
   {
     title: "Ma meilleure ennemie",
     artist: "Stromae & Pomme",
+    youtubeId: "j-RpvIuazmc",
     description:
       "Carmesí tóxico y magnético. Amor-odio que baila en círculos, como dos llamas que se persiguen y se queman mutuamente. Electrónica sofisticada con alma francesa y corazón herido.",
   },
   {
     title: "City of Stars",
     artist: "Ryan Gosling",
+    youtubeId: "fQLAyvDNmUU",
     description:
       "El carmesí nostálgico de los sueños de Hollywood al atardecer. Piano suave, jazz cinematográfico y un anhelo que brilla como luces de neón reflejadas en charcos rojos.",
   },
   {
     title: "Everyone Adores You (quiet)",
     artist: "Matt Maltese",
+    youtubeId: "xO78bGYEMEs",
     description:
       "Carmesí tímido, casi secreto. Admiración que se guarda en el pecho, susurros de \"al menos yo sí te adoro\" mientras el mundo pasa de largo. Melancolía delicada y aterciopelada.",
   },
   {
     title: "Californica",
     artist: "La Gusana Ciega",
+    youtubeId: "i2OOruTFi80",
     description:
       "El carmesí ardiente del rock mexicano, piel bronceada bajo el sol de medianoche, caderas que se mueven y miradas que nunca se alcanzan. Inalcanzable, sensual, adictivo.",
   },
   {
     title: "The Death of Peace of Mind",
     artist: "Bad Omens",
+    youtubeId: "ouW_RCAI0sg",
     description:
       "Carmesí oscuro, casi burdeos. Metal alternativo que late como un corazón acelerado después de una pelea apasionada. Intensidad cruda, catarsis que mancha y libera.",
   },
   {
     title: "Moon Dance",
     artist: "Michael Bublé",
+    youtubeId: "wPpJOpXp0UA",
     description:
       "Cierre en carmesí elegante y lunar. Swing suave, voz aterciopelada y la promesa de bailar bajo una luz rojiza hasta que amanezca. Porque incluso la pasión más intensa merece un vals final.",
   },
   {
     title: "Talk That Talk",
     artist: "TWICE",
+    youtubeId: "k6jqx9kZgPM",
     description:
       "Carmesí eléctrico y juguetón. Un guiño K-pop que vibra como neones en la madrugada, donde la timidez se derrite ante una confesión irresistible. Ritmo adictivo, dulzura con filo.",
   },
@@ -161,7 +169,7 @@ const PlaylistSection = ({ isOpen, onClose }: PlaylistSectionProps) => {
         />
 
         {/* Songs list */}
-        <div className="max-w-2xl w-full space-y-1">
+        <div className="max-w-2xl w-full space-y-6">
           {songs.map((song, i) => (
             <motion.div
               key={i}
@@ -171,7 +179,7 @@ const PlaylistSection = ({ isOpen, onClose }: PlaylistSectionProps) => {
               transition={{ delay: 1.3 + i * 0.2, duration: 0.8 }}
             >
               {/* Song card */}
-              <div className="relative px-6 py-5 rounded-lg transition-all duration-500 group-hover:bg-white/[0.03]">
+              <div className="relative px-6 py-6 rounded-lg transition-all duration-500 group-hover:bg-white/[0.03]">
                 {/* Track number */}
                 <div className="flex items-start gap-5">
                   <span
@@ -200,11 +208,30 @@ const PlaylistSection = ({ isOpen, onClose }: PlaylistSectionProps) => {
 
                     {/* Description */}
                     <p
-                      className="font-display text-sm sm:text-base italic leading-relaxed"
+                      className="font-display text-sm sm:text-base italic leading-relaxed mb-4"
                       style={{ color: "hsl(340 25% 55% / 0.8)" }}
                     >
                       {song.description}
                     </p>
+
+                    {/* YouTube embed */}
+                    <div className="mt-4 rounded-lg overflow-hidden" style={{
+                      border: "1px solid hsl(345 60% 45% / 0.2)",
+                      boxShadow: "0 0 20px hsl(345 60% 50% / 0.1)"
+                    }}>
+                      <iframe
+                        width="100%"
+                        height="120"
+                        src={`https://www.youtube.com/embed/${song.youtubeId}?color=white&modestbranding=1`}
+                        title={`${song.title} - ${song.artist}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        style={{
+                          borderRadius: "8px",
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
 
