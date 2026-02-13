@@ -15,14 +15,14 @@ import cavernBg from "@/assets/cavern-bg.jpg";
 import backgroundMusic from "@/assets/music/background.mp3";
 
 const LYRICS = [
-  "La más bella de las maldiciones",
-  "¿Puedo tener un baile más bajo la luna contigo, mi amor?",
-  "Tu canción favorita sonaba en la radio vieja",
-  "¿Me besarás en la boca y me amarás como un marinero?\n¿Y cuando pruebes, podrás decirme cuál es mi sabor?",
-  "¿Estás brillando solo para mí?",
-  "Puedes actuar tímido, pero sabes que te deseo",
-  "Quiero clavar mis colmillos en tu carne, morena",
-  "La forma en que tocas, la forma en que sabes",
+  "The most beautiful of all curses",
+  "Can I have one more dance beneath the moon with you, my love?",
+  "Your favorite song was playing on the old radio",
+  "Will you kiss me on the mouth and love me like a sailor?\nAnd when you taste, can you tell me what I taste like?",
+  "Are you glowing just for me?",
+  "You can act shy, but you know you want me",
+  "I want to sink my fangs into your flesh, my dark one",
+  "The way you touch, the way you know",
 ];
 
 const BUTTERFLY_POSITIONS = [

@@ -141,7 +141,7 @@ const CavernMenu = ({ isOpen, onClose, onOpenPoem, onOpenPlaylist }: CavernMenuP
               }}
             />
             <span className="font-display text-2xl sm:text-3xl font-light italic text-foreground/80 group-hover:text-foreground transition-colors duration-500 text-glow-carmine">
-              Canciones en Carmesí
+              Our songs
             </span>
             <p className="font-display text-sm text-foreground/40 mt-2 tracking-widest uppercase">
               Playlist
