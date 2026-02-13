@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 40% 6%;
+    --foreground: 200 20% 90%;
+
+    --card: 220 35% 10%;
+    --card-foreground: 200 20% 90%;
+
+    --popover: 220 35% 10%;
+    --popover-foreground: 200 20% 90%;
+
+    --primary: 345 70% 50%;
+    --primary-foreground: 340 60% 95%;
+
+    --secondary: 220 30% 15%;
+    --secondary-foreground: 200 20% 85%;
+
+    --muted: 220 25% 14%;
+    --muted-foreground: 210 15% 55%;
+
+    --accent: 345 70% 45%;
+    --accent-foreground: 340 60% 92%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 18%;
+    --input: 210 20% 18%;
+    --ring: 345 70% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --cyan-glow: 188 85% 60%;
+    --carmine: 345 72% 47%;
+    --carmine-soft: 345 60% 55%;
+    --carmine-deep: 345 80% 30%;
+    --rose-soft: 340 50% 75%;
+    --rose-blush: 340 60% 85%;
+    --crimson-deep: 345 80% 35%;
+    --pink-soft: 340 60% 80%;
+    --rose-glow: 345 65% 55%;
+    --cavern-deep: 220 45% 4%;
+    --cavern-mid: 220 38% 8%;
+    --journal-warm: 340 30% 12%;
+    --journal-accent: 345 40% 18%;
+    --playlist-deep: 345 50% 8%;
+    --playlist-mid: 345 35% 12%;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Cormorant Garamond', serif;
+
+    --glow-cyan: 0 0 20px hsl(188 85% 60% / 0.6), 0 0 60px hsl(188 85% 60% / 0.2);
+    --glow-carmine: 0 0 20px hsl(345 72% 47% / 0.5), 0 0 60px hsl(345 72% 47% / 0.15);
+    --glow-carmine-intense: 0 0 30px hsl(345 72% 47% / 0.8), 0 0 80px hsl(345 72% 47% / 0.3);
+    --glow-cyan-intense: 0 0 30px hsl(188 85% 60% / 0.8), 0 0 80px hsl(188 85% 60% / 0.3);
+    --glow-rose: 0 0 15px hsl(340 60% 80% / 0.5), 0 0 40px hsl(340 60% 80% / 0.2);
+
+    --sidebar-background: 220 35% 8%;
+    --sidebar-foreground: 200 20% 85%;
+    --sidebar-primary: 345 70% 50%;
+    --sidebar-primary-foreground: 340 60% 95%;
+    --sidebar-accent: 220 25% 14%;
+    --sidebar-accent-foreground: 200 20% 85%;
+    --sidebar-border: 210 20% 18%;
+    --sidebar-ring: 345 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glow-carmine {
+    box-shadow: var(--glow-carmine);
+  }
+
+  .glow-cyan-intense {
+    box-shadow: var(--glow-cyan-intense);
+  }
+
+  .glow-carmine-intense {
+    box-shadow: var(--glow-carmine-intense);
+  }
+
+  .glow-rose {
+    box-shadow: var(--glow-rose);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 20px hsl(188 85% 60% / 0.5), 0 0 40px hsl(188 85% 60% / 0.2);
+  }
+
+  .text-glow-carmine {
+    text-shadow: 0 0 15px hsl(345 72% 47% / 0.5), 0 0 30px hsl(345 72% 47% / 0.2);
+  }
+
+  .text-glow-rose {
+    text-shadow: 0 0 12px hsl(340 60% 80% / 0.4), 0 0 25px hsl(340 60% 80% / 0.15);
+  }
+
+  .bg-cavern {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--cavern-deep)) 0%,
+      hsl(var(--cavern-mid)) 50%,
+      hsl(var(--cavern-deep)) 100%
+    );
+  }
+
+  .bg-journal {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--journal-warm)) 0%,
+      hsl(var(--journal-accent)) 50%,
+      hsl(var(--journal-warm)) 100%
+    );
+  }
+
+  .bg-playlist {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--playlist-deep)) 0%,
+      hsl(var(--playlist-mid)) 40%,
+      hsl(345 45% 10%) 70%,
+      hsl(var(--playlist-deep)) 100%
+    );
+  }
+
+  .divider-carmine {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--carmine-soft)) 50%,
+      transparent 100%
+    );
+  }
+}
+
+/* Butterfly float animations */
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(30px, -40px) rotate(5deg); }
+  50% { transform: translate(-20px, -70px) rotate(-3deg); }
+  75% { transform: translate(40px, -30px) rotate(4deg); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-40px, -30px) rotate(-5deg); }
+  50% { transform: translate(30px, -60px) rotate(3deg); }
+  75% { transform: translate(-20px, -40px) rotate(-4deg); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(50px, -50px) rotate(6deg); }
+  66% { transform: translate(-30px, -80px) rotate(-4deg); }
+}
+
+@keyframes float-4 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-35px, -55px) rotate(-3deg); }
+  40% { transform: translate(25px, -35px) rotate(5deg); }
+  60% { transform: translate(-45px, -65px) rotate(-6deg); }
+  80% { transform: translate(15px, -25px) rotate(2deg); }
+}
+
+@keyframes wing-flutter {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.85); }
+}
+
+@keyframes particle-rise {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.3); }
+}
+
+@keyframes carmine-pulse {
+  0% { transform: scale(0.5); opacity: 0.6; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-wing-flutter {
+  animation: wing-flutter 0.8s ease-in-out infinite;
+}
+
+.animate-particle-rise {
+  animation: particle-rise 2s ease-out forwards;
+}
+
+.animate-carmine-pulse {
+  animation: carmine-pulse 1.5s ease-out forwards;
+}
+
+.animate-gentle-bob {
+  animation: gentle-bob 3s ease-in-out infinite;
+}
