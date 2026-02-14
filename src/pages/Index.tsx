@@ -15,14 +15,14 @@ import cavernBg from "@/assets/cavern-bg.jpg";
 import backgroundMusic from "@/assets/music/background.mp3";
 
 const LYRICS = [
-  "The most beautiful of all curses",
-  "Can I have one more dance beneath the moon with you, my love?",
-  "Your favorite song was playing on the old radio",
-  "Will you kiss me on the mouth and love me like a sailor?\nAnd when you taste, can you tell me what I taste like?",
-  "Are you glowing just for me?",
-  "You can act shy, but you know you want me",
-  "I want to sink my fangs into your flesh, my dark one",
-  "The way you touch, the way you know",
+  "La plus belle des malédictions",
+  "Can I just have one more moondance with you, my love?",
+  "Your favorite song was on the oldies station",
+  "Oh, won't you kiss me on the mouth and love me like a sailor?\nAnd when you get a taste, can you tell me what's my flavor?",
+  "Are you shining just for me?",
+  "You can act all shy, But you know that I want you",
+  "Quiero clavar mis colmillos, En tu carne, morena",
+  "The way you touch, the way you taste",
 ];
 
 const BUTTERFLY_POSITIONS = [
